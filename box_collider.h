@@ -14,21 +14,16 @@ public:
   BoxCollider(MovementType movement_type, const Vector2& center, double width, double height) :
       movement_type_(movement_type), center_(center), width_(width), height_(height) {}
 
-  MovementType movement_type() const {
-    return movement_type_;
-  }
-
   bool has_collision(const BoxCollider& rhs) const;
 
   virtual void on_collision(GameObject* /*game_object*/) {};
 
-protected:
-  const Vector2& center() const {
-    return center_;
+  MovementType movement_type() const {
+    return movement_type_;
   }
 
-  void set_center(const Vector2& center) {
-    center_ = center;
+  const Vector2& center() const {
+    return center_;
   }
 
   double width() const {
@@ -37,6 +32,11 @@ protected:
 
   double height() const {
     return height_;
+  }
+
+protected:
+  void set_center(const Vector2& center) {
+    center_ = center;
   }
 
 private:
