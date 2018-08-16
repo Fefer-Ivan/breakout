@@ -2,7 +2,6 @@
 
 namespace breakout {
 
-
 Vector2& Vector2::operator += (const Vector2& rhs) {
   x_ += rhs.x_;
   y_ += rhs.y_;
