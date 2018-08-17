@@ -11,9 +11,6 @@ enum class MovementType {
 
 class BoxCollider : public GameObject {
 public:
-  BoxCollider(MovementType movement_type, const Vector2& center, double width, double height) :
-      movement_type_(movement_type), center_(center), width_(width), height_(height) {}
-
   bool has_collision(const BoxCollider& rhs) const;
 
   virtual void on_collision(GameObject* /*game_object*/) {};
@@ -35,6 +32,9 @@ public:
   }
 
 protected:
+  BoxCollider(MovementType movement_type, const Vector2& center, double width, double height) :
+      movement_type_(movement_type), center_(center), width_(width), height_(height) {}
+
   void set_center(const Vector2& center) {
     center_ = center;
   }
@@ -54,16 +54,16 @@ public:
 
 class DynamicBoxCollider : public BoxCollider {
 public:
-  DynamicBoxCollider(const Vector2& center, double width, double height) :
-      BoxCollider(MovementType::Dynamic, center, width, height) {}
+  DynamicBoxCollider(const Vector2& center, double width, double height, const Vector2& velocity) :
+      BoxCollider(MovementType::Dynamic, center, width, height), velocity_(velocity) {}
 
   void update(Seconds time_delta) override;
 
-protected:
   const Vector2& velocity() const {
     return velocity_;
   }
 
+protected:
   void set_velocity(const Vector2& velocity) {
     velocity_ = velocity;
   }
