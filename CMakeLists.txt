@@ -13,7 +13,11 @@ add_library(breakout_lib ${SOURCES})
 add_executable(breakout main.cpp)
 target_link_libraries(breakout breakout_lib)
 
+enable_testing()
+
 file(GLOB_RECURSE TEST_SOURCES "tests/*.cpp")
 add_executable(breakout_tests ${TEST_SOURCES})
 target_link_libraries(breakout_tests breakout_lib gtest)
 target_include_directories(breakout_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_test(NAME unit_tests COMMAND breakout_tests)
