@@ -1,4 +1,6 @@
 #pragma once
+#include <ctime>
+#include <ratio>
 #include <chrono>
 
 namespace breakout {

@@ -29,7 +29,7 @@ Vector2 operator - (const Vector2& lhs, const Vector2& rhs) {
 }
 
 Vector2 operator * (const Vector2& lhs, double rhs) {
-  return Vector2(lhs) * rhs;
+  return Vector2(lhs) *= rhs;
 }
 
 Vector2 operator * (double lhs, const Vector2& rhs) {
@@ -37,4 +37,3 @@ Vector2 operator * (double lhs, const Vector2& rhs) {
 }
 
 }  // namespace breakout
-
