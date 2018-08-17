@@ -8,6 +8,7 @@ class GameEngine;
 class GameObject {
 public:
   GameObject(GameEngine* game_engine) : game_engine_(game_engine), dead_(false) {}
+  virtual ~GameObject() = default;
 
   virtual void update(Seconds /*time_delta*/) {};
   virtual void on_death() {};

@@ -34,13 +34,6 @@ void handle_collisions_range(
 
 }  // namespace
 
-GameEngine::GameEngine(std::vector<std::shared_ptr<GameObject>> game_objects) : stopped_(false) {
-  game_objects_.reserve(game_objects.size());
-  for (auto& game_object : game_objects) {
-    spawn_game_object(std::move(game_object));
-  }
-}
-
 GameEngine::~GameEngine() = default;
 
 void GameEngine::run_main_loop() {

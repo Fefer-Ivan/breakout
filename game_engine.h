@@ -11,10 +11,7 @@ class StaticBoxCollider;
 
 class GameEngine {
 public:
-  GameEngine(std::vector<std::shared_ptr<GameObject>> game_objects);
   ~GameEngine();
-
-  void run_main_loop();
 
   void stop() {
     stopped_ = true;
@@ -22,8 +19,11 @@ public:
 
   template<typename T, typename... Args>
   void spawn_game_object(Args&&... args) {
-    spawn_game_object(std::make_shared<T>(std::forward<Args>(args)...));
+    spawn_game_object(std::make_shared<T>(this, std::forward<Args>(args)...));
   }
+
+protected:
+  void run_main_loop();
 
 private:
   void update(const Seconds& time_delta);
@@ -43,6 +43,19 @@ private:
   std::vector<std::shared_ptr<GameObject>> game_objects_;
   std::vector<std::shared_ptr<DynamicBoxCollider>> dynamic_colliders_;
   std::vector<std::shared_ptr<StaticBoxCollider>> static_colliders_;
+};
+
+class GameEngineRunner : private GameEngine {
+public:
+  virtual ~GameEngineRunner() = default;
+
+  void run() {
+    create_initial_game_objects();
+    run_main_loop();
+  }
+
+private:
+  virtual void create_initial_game_objects() = 0;
 };
 
 }  // namespace breakout
