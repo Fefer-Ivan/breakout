@@ -87,7 +87,7 @@ void GameEngine::draw() {
   }
 }
 
-void GameEngine::spawn_game_object(std::shared_ptr<GameObject> game_object) {
+void GameEngine::register_game_object(std::shared_ptr<GameObject> game_object) {
   add_collider_if_needed(game_object);
   game_objects_.emplace_back(std::move(game_object));
 }

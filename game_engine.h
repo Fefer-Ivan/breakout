@@ -18,8 +18,8 @@ public:
   }
 
   template<typename T, typename... Args>
-  void spawn_game_object(Args&&... args) {
-    spawn_game_object(std::make_shared<T>(this, std::forward<Args>(args)...));
+  void create_game_object(Args&&... args) {
+    register_game_object(std::make_shared<T>(this, std::forward<Args>(args)...));
   }
 
 protected:
@@ -36,7 +36,7 @@ private:
 
   void draw();
 
-  void spawn_game_object(std::shared_ptr<GameObject> game_object);
+  void register_game_object(std::shared_ptr<GameObject> game_object);
   void add_collider_if_needed(const std::shared_ptr<GameObject>& game_object);
 
   bool stopped_;
@@ -45,7 +45,7 @@ private:
   std::vector<std::shared_ptr<StaticBoxCollider>> static_colliders_;
 };
 
-class GameEngineRunner : private GameEngine {
+class GameEngineRunner : protected GameEngine {
 public:
   virtual ~GameEngineRunner() = default;
 
