@@ -4,71 +4,71 @@
 using namespace breakout;
 
 TEST(BoxCollider, CollisionFar) {
-  StaticBoxCollider a(Vector2(0, 0), 10, 10);
-  StaticBoxCollider b(Vector2(100, 100), 10, 10);
+  StaticBoxCollider a(nullptr, Vector2(0, 0), 10, 10);
+  StaticBoxCollider b(nullptr, Vector2(100, 100), 10, 10);
   EXPECT_FALSE(a.has_collision(b));
   EXPECT_FALSE(b.has_collision(a));
 }
 
 TEST(BoxCollider, CollisionNear) {
-  StaticBoxCollider a(Vector2(0, 0), 10, 10);
-  StaticBoxCollider b(Vector2(11, 11), 10, 10);
+  StaticBoxCollider a(nullptr, Vector2(0, 0), 10, 10);
+  StaticBoxCollider b(nullptr, Vector2(11, 11), 10, 10);
   EXPECT_FALSE(a.has_collision(b));
   EXPECT_FALSE(b.has_collision(a));
 }
 
 TEST(BoxCollider, CollisionOnY) {
-  StaticBoxCollider a(Vector2(0, 0), 10, 10);
-  StaticBoxCollider b(Vector2(11, 4), 10, 10);
+  StaticBoxCollider a(nullptr, Vector2(0, 0), 10, 10);
+  StaticBoxCollider b(nullptr, Vector2(11, 4), 10, 10);
   EXPECT_FALSE(a.has_collision(b));
   EXPECT_FALSE(b.has_collision(a));
 }
 
 TEST(BoxCollider, CollisionOnX) {
-  StaticBoxCollider a(Vector2(0, 0), 10, 10);
-  StaticBoxCollider b(Vector2(-4, 11), 10, 10);
+  StaticBoxCollider a(nullptr, Vector2(0, 0), 10, 10);
+  StaticBoxCollider b(nullptr, Vector2(-4, 11), 10, 10);
   EXPECT_FALSE(a.has_collision(b));
   EXPECT_FALSE(b.has_collision(a));
 }
 
 TEST(BoxCollider, CollisionTouchY) {
-  StaticBoxCollider a(Vector2(0, 0), 10, 10);
-  StaticBoxCollider b(Vector2(0, 7), 4, 4);
+  StaticBoxCollider a(nullptr, Vector2(0, 0), 10, 10);
+  StaticBoxCollider b(nullptr, Vector2(0, 7), 4, 4);
   EXPECT_TRUE(a.has_collision(b));
   EXPECT_TRUE(b.has_collision(a));
 }
 
 TEST(BoxCollider, CollisionTouchX) {
-  StaticBoxCollider a(Vector2(0, 0), 10, 10);
-  StaticBoxCollider b(Vector2(7, 0), 4, 4);
+  StaticBoxCollider a(nullptr, Vector2(0, 0), 10, 10);
+  StaticBoxCollider b(nullptr, Vector2(7, 0), 4, 4);
   EXPECT_TRUE(a.has_collision(b));
   EXPECT_TRUE(b.has_collision(a));
 }
 
 TEST(BoxCollider, CollisionTouchCorner) {
-  StaticBoxCollider a(Vector2(0, 0), 10, 10);
-  StaticBoxCollider b(Vector2(-7, -7), 4, 4);
+  StaticBoxCollider a(nullptr, Vector2(0, 0), 10, 10);
+  StaticBoxCollider b(nullptr, Vector2(-7, -7), 4, 4);
   EXPECT_TRUE(a.has_collision(b));
   EXPECT_TRUE(b.has_collision(a));
 }
 
 TEST(BoxCollider, CollisionInside) {
-  StaticBoxCollider a(Vector2(0, 0), 10, 10);
-  StaticBoxCollider b(Vector2(2, 2), 4, 4);
+  StaticBoxCollider a(nullptr, Vector2(0, 0), 10, 10);
+  StaticBoxCollider b(nullptr, Vector2(2, 2), 4, 4);
   EXPECT_TRUE(a.has_collision(b));
   EXPECT_TRUE(b.has_collision(a));
 }
 
 TEST(BoxCollider, CollisionIntersect) {
-  StaticBoxCollider a(Vector2(0, 0), 10, 10);
-  StaticBoxCollider b(Vector2(-4, -4), 4, 4);
+  StaticBoxCollider a(nullptr, Vector2(0, 0), 10, 10);
+  StaticBoxCollider b(nullptr, Vector2(-4, -4), 4, 4);
   EXPECT_TRUE(a.has_collision(b));
   EXPECT_TRUE(b.has_collision(a));
 }
 
 TEST(BoxCollider, DynamicUpdate) {
   Vector2 v(10, 10);
-  DynamicBoxCollider d(Vector2(0, 0), 1, 1, v);
+  DynamicBoxCollider d(nullptr, Vector2(0, 0), 1, 1, v);
   d.update(0.5s);
   EXPECT_EQ(d.center().x(), 5);
   EXPECT_EQ(d.center().y(), 5);
@@ -79,7 +79,7 @@ TEST(BoxCollider, DynamicUpdate) {
 
 TEST(BoxCollider, DynamicUpdateZeroVelocity) {
   Vector2 v(0, 0);
-  DynamicBoxCollider d(Vector2(0, 0), 1, 1, v);
+  DynamicBoxCollider d(nullptr, Vector2(0, 0), 1, 1, v);
   d.update(100s);
   EXPECT_EQ(d.center().x(), 0);
   EXPECT_EQ(d.center().y(), 0);

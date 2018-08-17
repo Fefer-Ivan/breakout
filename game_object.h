@@ -7,6 +7,8 @@ class GameEngine;
 
 class GameObject {
 public:
+  GameObject(GameEngine* game_engine) : game_engine_(game_engine), dead_(false) {}
+
   virtual void update(Seconds /*time_delta*/) {};
   virtual void on_death() {};
   virtual void draw() const {};
@@ -28,8 +30,8 @@ protected:
   }
 
 private:
-  bool dead_;
   GameEngine* game_engine_;
+  bool dead_;
 };
 
 }  // namespace breakout

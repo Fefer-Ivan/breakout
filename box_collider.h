@@ -32,8 +32,14 @@ public:
   }
 
 protected:
-  BoxCollider(MovementType movement_type, const Vector2& center, double width, double height) :
-      movement_type_(movement_type), center_(center), width_(width), height_(height) {}
+  BoxCollider(
+      GameEngine* game_engine,
+      MovementType movement_type,
+      const Vector2& center,
+      double width,
+      double height) :
+          GameObject(game_engine),
+          movement_type_(movement_type), center_(center), width_(width), height_(height) {}
 
   void set_center(const Vector2& center) {
     center_ = center;
@@ -48,14 +54,19 @@ private:
 
 class StaticBoxCollider : public BoxCollider {
 public:
-  StaticBoxCollider(const Vector2& center, double width, double height) :
-      BoxCollider(MovementType::Static, center, width, height) {}
+  StaticBoxCollider(GameEngine* game_engine, const Vector2& center, double width, double height) :
+      BoxCollider(game_engine, MovementType::Static, center, width, height) {}
 };
 
 class DynamicBoxCollider : public BoxCollider {
 public:
-  DynamicBoxCollider(const Vector2& center, double width, double height, const Vector2& velocity) :
-      BoxCollider(MovementType::Dynamic, center, width, height), velocity_(velocity) {}
+  DynamicBoxCollider(
+      GameEngine* game_engine,
+      const Vector2& center,
+      double width,
+      double height,
+      const Vector2& velocity) :
+          BoxCollider(game_engine, MovementType::Dynamic, center, width, height), velocity_(velocity) {}
 
   void update(Seconds time_delta) override;
 
