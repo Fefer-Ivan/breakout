@@ -45,7 +45,7 @@ GameEngine::~GameEngine() = default;
 
 void GameEngine::run_main_loop() {
   Timer timer;
-  while (!stopped_) {
+  while (!stopped_ && !game_objects_.empty()) {
     auto time_delta = std::min(kMaxTimeDelta, timer.get_duration_and_restart());
     update(time_delta);
     handle_collisions();
