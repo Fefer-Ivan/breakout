@@ -12,8 +12,10 @@ public:
   virtual void draw() const {};
 
   void kill() {
-    dead_ = true;
-    on_death();
+    if (!dead_) {
+      dead_ = true;
+      on_death();
+    }
   }
 
   bool is_dead() const {
