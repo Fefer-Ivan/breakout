@@ -18,8 +18,10 @@ public:
   }
 
   template<typename T, typename... Args>
-  void create_game_object(Args&&... args) {
-    register_game_object(std::make_shared<T>(this, std::forward<Args>(args)...));
+  std::shared_ptr<T> create_game_object(Args&&... args) {
+    auto game_object = std::make_shared<T>(this, std::forward<Args>(args)...);
+    register_game_object(game_object);
+    return game_object;
   }
 
 protected:
