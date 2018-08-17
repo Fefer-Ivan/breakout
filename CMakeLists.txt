@@ -8,7 +8,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 file(GLOB SOURCES "*.cpp")
 list(REMOVE_ITEM SOURCES main.cpp)
-add_library(breakout_lib ${SOURCES})
+file(GLOB GAME_OBJECTS_SOURCES "game_objects/*.cpp")
+add_library(breakout_lib ${SOURCES} ${GAME_OBJECTS_SOURCES})
 
 add_executable(breakout main.cpp)
 target_link_libraries(breakout breakout_lib)
