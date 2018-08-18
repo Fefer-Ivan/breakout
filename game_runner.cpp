@@ -2,7 +2,7 @@
 #include "canvas.h"
 #include "game_objects/game_manager.h"
 #include "game_objects/ball.h"
-#include "game_objects/brick.h"
+#include "game_objects/brick_with_pickup.h"
 #include <iostream>
 
 namespace breakout {
@@ -41,7 +41,7 @@ void GameRunner::stop() {
 
 void GameRunner::create_initial_game_objects() {
   game_manager_ = create_game_object<GameManager>(lifes_, score_);
-  create_game_object<CheapBrick>(Vector2(60, 50), game_manager_.get());
+  create_game_object<BrickWithExtraScore>(Vector2(60, 50), game_manager_.get());
   create_game_object<CheapBrick>(Vector2(40, 30), game_manager_.get());
   create_game_object<Ball>(Vector2(40, 40), game_manager_.get());
 }
