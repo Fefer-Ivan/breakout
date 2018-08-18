@@ -26,7 +26,7 @@ QColor to_qcolor(Color color) {
 
 }  // namespace
 
-void draw_box(Vector2 center, double width, double height, Color color) {
+void QCanvas::draw_box(Vector2 center, double width, double height, Color color) {
   painter_->setPen(to_qcolor(color));
   painter_->drawRect(
       static_cast<int>(center.x()),
@@ -35,9 +35,12 @@ void draw_box(Vector2 center, double width, double height, Color color) {
       static_cast<int>(height));
 }
 
-void draw_text(Vector2 position, const std::string& text, Color color) {
+void QCanvas::draw_text(Vector2 position, const std::string& text, Color color) {
   painter_->setPen(to_qcolor(color));
-  painter_->drawText(static_cast<int>(position.x()), static_cast<int>(position.y()), text);
+  painter_->drawText(
+      static_cast<int>(position.x()),
+      static_cast<int>(position.y()),
+      QString::fromStdString(text));
 }
 
 

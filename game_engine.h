@@ -4,7 +4,7 @@
 #include "vector2.h"
 #include <memory>
 #include <vector>
-#include <QColor>
+#include <mutex>
 
 namespace breakout {
 
@@ -30,7 +30,8 @@ public:
 
 protected:
   void run_main_loop();
-  void draw(Canvas * canvas);
+  void draw(Canvas * canvas) const;
+  void reset();
 
 private:
   static constexpr double kGameFieldWidth = 100;
@@ -74,13 +75,17 @@ class GameEngineRunner : protected GameEngine {
 public:
   virtual ~GameEngineRunner() = default;
 
-  void run() {
+  void run_main_loop() {
     create_initial_game_objects();
-    run_main_loop();
+    GameEngine::run_main_loop();
   }
 
-  void draw(Canvas* canvas) {
+  void draw(Canvas* canvas) const {
     GameEngine::draw(canvas);
+  }
+
+  void reset() {
+    GameEngine::reset();
   }
 
 private:

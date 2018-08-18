@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "qcanvas.h"
 
 namespace breakout {
 
@@ -53,8 +54,7 @@ void MainWindow::render_now() {
   backing_store_->flush(rect);
 }
 
-void MainWindow::render(QPainter* painter) {
-    painter->drawText(QRectF(0, 0, width(), height()), Qt::AlignCenter, QStringLiteral("QWindow"));
+void MainWindow::render(QPainter* /*painter*/) {
 }
 
 }  // namespace breakout

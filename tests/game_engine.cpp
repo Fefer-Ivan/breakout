@@ -117,17 +117,17 @@ class SeveralBoxesMoveTestLevel : public GameEngineRunner {
 }  // namespace
 
 TEST(GameEngine, TwoDynamicBoxesInstant) {
-  TwoDynamicBoxesInstantTestLevel().run();
+  TwoDynamicBoxesInstantTestLevel().run_main_loop();
 }
 
 TEST(GameEngine, TwoDynamicBoxesMove) {
-  TwoDynamicBoxesMoveTestLevel().run();
+  TwoDynamicBoxesMoveTestLevel().run_main_loop();
 }
 
 TEST(GameEngine, DynamicAndStaticBoxes) {
-  DynamicAndStaticBoxesMoveTestLevel().run();
+  DynamicAndStaticBoxesMoveTestLevel().run_main_loop();
 }
 
 TEST(GameEngine, SeveralBoxes) {
-   SeveralBoxesMoveTestLevel().run();
+   SeveralBoxesMoveTestLevel().run_main_loop();
 }

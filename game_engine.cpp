@@ -46,7 +46,7 @@ void GameEngine::run_main_loop() {
   }
 }
 
-void GameEngine::draw(Canvas* canvas) {
+void GameEngine::draw(Canvas* canvas) const {
   CoordinatesTransformCanvasWrapper game_engine_canvas(canvas);
   for (const auto& game_object : game_objects_) {
     game_object->draw(&game_engine_canvas);
@@ -90,6 +90,12 @@ void GameEngine::update(const Seconds& time_delta) {
   for (auto& game_object : game_objects_) {
     game_object->update(time_delta);
   }
+}
+
+void GameEngine::reset() {
+  game_objects_.clear();
+  dynamic_colliders_.clear();
+  static_colliders_.clear();
 }
 
 void GameEngine::handle_collisions() {
