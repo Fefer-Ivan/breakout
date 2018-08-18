@@ -35,10 +35,10 @@ protected:
   void draw(Canvas * canvas) const;
   void reset();
 
-private:
   static constexpr double kGameFieldWidth = 100;
   static constexpr double kGameFieldHeight = 100;
 
+private:
   class CoordinatesTransformCanvasWrapper : public Canvas {
   public:
     CoordinatesTransformCanvasWrapper(Canvas* canvas) :

@@ -41,7 +41,8 @@ void GameRunner::stop() {
 
 void GameRunner::create_initial_game_objects() {
   game_manager_ = create_game_object<GameManager>(lifes_, score_);
-  create_game_object<CheapBrick>(Vector2(50, 50), game_manager_.get());
+  create_game_object<CheapBrick>(Vector2(60, 50), game_manager_.get());
+  create_game_object<CheapBrick>(Vector2(40, 30), game_manager_.get());
   create_game_object<Ball>(Vector2(40, 40), game_manager_.get());
 }
 
