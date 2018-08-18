@@ -47,6 +47,8 @@ void GameEngine::run_main_loop() {
 }
 
 void GameEngine::draw(Canvas* canvas) const {
+  std::lock_guard<std::mutex> lock_guard(draw_reset_mutex_);
+
   CoordinatesTransformCanvasWrapper game_engine_canvas(canvas);
   for (const auto& game_object : game_objects_) {
     game_object->draw(&game_engine_canvas);
@@ -93,6 +95,8 @@ void GameEngine::update(const Seconds& time_delta) {
 }
 
 void GameEngine::reset() {
+  std::lock_guard<std::mutex> lock_guard(draw_reset_mutex_);
+
   game_objects_.clear();
   dynamic_colliders_.clear();
   static_colliders_.clear();

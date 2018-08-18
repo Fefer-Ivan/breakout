@@ -69,6 +69,7 @@ private:
   std::vector<std::shared_ptr<GameObject>> game_objects_;
   std::vector<std::shared_ptr<DynamicBoxCollider>> dynamic_colliders_;
   std::vector<std::shared_ptr<StaticBoxCollider>> static_colliders_;
+  mutable std::mutex draw_reset_mutex_;
 };
 
 class GameEngineRunner : protected GameEngine {
