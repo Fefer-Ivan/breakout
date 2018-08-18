@@ -2,11 +2,11 @@
 #include <QMainWindow>
 #include <memory>
 
-namespace ui {
+namespace Ui {
 
 class MainWindow;
 
-}  // namespace ui
+}  // namespace Ui
 
 namespace breakout {
 
