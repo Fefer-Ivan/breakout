@@ -2,6 +2,9 @@
 #include "seconds.h"
 #include <memory>
 #include <vector>
+#include <QColor>
+
+class QPainter;
 
 namespace breakout {
 
@@ -24,8 +27,11 @@ public:
     return game_object;
   }
 
+  void draw_box(Vector2 center, double width, double height, QColor color);
+
 protected:
   void run_main_loop();
+  void draw(QPainter* painter);
 
 private:
   void update(const Seconds& time_delta);
@@ -35,8 +41,6 @@ private:
   void handle_static_collisions(std::shared_ptr<DynamicBoxCollider>& lhs_collider);
 
   void remove_dead_objects();
-
-  void draw();
 
   void register_game_object(std::shared_ptr<GameObject> game_object);
   void add_collider_if_needed(const std::shared_ptr<GameObject>& game_object);

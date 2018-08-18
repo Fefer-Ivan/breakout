@@ -9,16 +9,18 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
+find_package(Qt5Widgets)
+
 file(GLOB LIB_SOURCES "*.cpp")
 file(GLOB GAME_OBJECTS_SOURCES "game_objects/*.cpp")
 add_library(breakout_lib ${LIB_SOURCES} ${GAME_OBJECTS_SOURCES})
+target_link_libraries(breakout_lib Qt5::Widgets)
 
-find_package(Qt5Widgets)
 
 file(GLOB APP_SOURCES "app/*.cpp")
 file(GLOB APP_UI "app/*.ui")
 add_executable(breakout ${APP_SOURCES} ${APP_UI})
-target_link_libraries(breakout breakout_lib Qt5::Widgets)
+target_link_libraries(breakout breakout_lib)
 
 enable_testing()
 
