@@ -43,7 +43,6 @@ void GameEngine::run_main_loop() {
     update(time_delta);
     handle_collisions();
     remove_dead_objects();
-    draw();
   }
 }
 
@@ -79,12 +78,6 @@ void GameEngine::remove_dead_objects() {
   remove_if(game_objects_, [] (const auto& game_object) { return game_object->is_dead(); });
   remove_if(static_colliders_, [] (const auto& game_object) { return game_object->is_dead(); });
   remove_if(dynamic_colliders_, [] (const auto& game_object) { return game_object->is_dead(); });
-}
-
-void GameEngine::draw() {
-  for (auto& game_object : game_objects_) {
-    game_object->draw();
-  }
 }
 
 void GameEngine::register_game_object(std::shared_ptr<GameObject> game_object) {

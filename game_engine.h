@@ -4,8 +4,6 @@
 #include <vector>
 #include <QColor>
 
-class QPainter;
-
 namespace breakout {
 
 class GameObject;
@@ -27,11 +25,8 @@ public:
     return game_object;
   }
 
-  void draw_box(Vector2 center, double width, double height, QColor color);
-
 protected:
   void run_main_loop();
-  void draw(QPainter* painter);
 
 private:
   void update(const Seconds& time_delta);
