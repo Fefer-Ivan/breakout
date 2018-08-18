@@ -1,60 +1,15 @@
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 namespace breakout {
 
-MainWindow::MainWindow(QWindow* parent) :
-    QWindow(parent),
-    backing_store_(new QBackingStore(this)) {
-  resize(700, 700);
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(std::make_unique<Ui::MainWindow>())
+{
+    ui->setupUi(this);
 }
 
-bool MainWindow::event(QEvent* event) {
-  if (event->type() == QEvent::UpdateRequest) {
-    render_now();
-    return true;
-  }
-  return QWindow::event(event);
-}
-
-void MainWindow::render_later() {
-  requestUpdate();
-}
-
-void MainWindow::resizeEvent(QResizeEvent* resize_event) {
-  backing_store_->resize(resize_event->size());
-  if (isExposed()) {
-    render_now();
-  }
-}
-
-void MainWindow::exposeEvent(QExposeEvent*) {
-  if (isExposed()) {
-    render_now();
-  }
-}
-
-
-void MainWindow::render_now() {
-  if (!isExposed()) {
-    return;
-  }
-
-  QRect rect(0, 0, width(), height());
-  backing_store_->beginPaint(rect);
-
-  QPaintDevice* device = backing_store_->paintDevice();
-  QPainter painter(device);
-
-  painter.fillRect(0, 0, width(), height(), Qt::white);
-  render(&painter);
-  painter.end();
-
-  backing_store_->endPaint();
-  backing_store_->flush(rect);
-}
-
-void MainWindow::render(QPainter* painter) {
-    painter->drawText(QRectF(0, 0, width(), height()), Qt::AlignCenter, QStringLiteral("QWindow"));
-}
+MainWindow::~MainWindow() = default;
 
 }  // namespace breakout
