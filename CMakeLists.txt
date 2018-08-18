@@ -5,20 +5,25 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wconversion -Wsign-conversion -Wunreach
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=deprecated-declarations")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fno-stack-protector")
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
 
-file(GLOB SOURCES "*.cpp")
-list(REMOVE_ITEM SOURCES main.cpp)
+file(GLOB LIB_SOURCES "*.cpp")
 file(GLOB GAME_OBJECTS_SOURCES "game_objects/*.cpp")
-add_library(breakout_lib ${SOURCES} ${GAME_OBJECTS_SOURCES})
+add_library(breakout_lib ${LIB_SOURCES} ${GAME_OBJECTS_SOURCES})
 
-add_executable(breakout main.cpp)
-target_link_libraries(breakout breakout_lib)
+find_package(Qt5Widgets)
+
+file(GLOB APP_SOURCES "app/*.cpp")
+file(GLOB APP_UI "app/*.ui")
+add_executable(breakout ${APP_SOURCES} ${APP_UI})
+target_link_libraries(breakout breakout_lib Qt5::Widgets)
 
 enable_testing()
 
 file(GLOB_RECURSE TEST_SOURCES "tests/*.cpp")
 add_executable(breakout_tests ${TEST_SOURCES})
 target_link_libraries(breakout_tests breakout_lib gtest)
-target_include_directories(breakout_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_test(NAME unit_tests COMMAND breakout_tests)
