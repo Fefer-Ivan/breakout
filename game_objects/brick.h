@@ -36,6 +36,10 @@ public:
   CheapBrick(GameEngine* engine, const Vector2& center, GameManager* manager) :
       Brick(engine, center, manager, kCheapBrickScore) {}
 
+  void draw(Canvas* canvas) const override {
+    canvas->draw_box(center(), width(), height(), Color::Green);
+  };
+
 private:
   static constexpr kCheapBrickScore = 10;
 }
@@ -45,6 +49,11 @@ public:
   MiddleBrick(GameEngine* engine, const Vector2& center, GameManager* manager) :
       Brick(engine, center, manager, kMiddleBrickScore) {}
 
+  void draw(Canvas* canvas) const override {
+    canvas->draw_box(center(), width(), height(), Color::Yellow);
+  };
+
+
 private:
   static constexpr kMiddleBrickScore = 20;
 }
@@ -53,6 +62,10 @@ class ExpensiveBrick : public Brick {
 public:
   ExpensiveBrick(GameEngine* engine, const Vector2& center, GameManager* manager) :
       Brick(engine, center, manager, kExpensiveBrickScore) {}
+
+  void draw(Canvas* canvas) const override {
+    canvas->draw_box(center(), width(), height(), Color::Red);
+  };
 
 private:
   static constexpr kExpensiveBrickScore = 50;
@@ -75,6 +88,10 @@ public:
   BrickWithExtraScore(GameEngine* engine, const Vector2& center, GameManager* manager) :
       Brick(engine, center, manager, kBrickWithExtraScoreScore) {}
 
+  void draw(Canvas* canvas) const override {
+    canvas->draw_box(center(), width(), height(), Color::DarkGreen);
+  };
+
 private:
   static constexpr kBrickWithExtraScoreScore = 10;
 }
@@ -84,6 +101,10 @@ public:
   BrickWithExtraLife(GameEngine* engine, const Vector2& center, GameManager* manager) :
       Brick(engine, center, manager, kBrickWithExtraLifeScore) {}
 
+  void draw(Canvas* canvas) const override {
+    canvas->draw_box(center(), width(), height(), Color::DarkYellow);
+  };
+
 private:
   static constexpr kBrickWithExtraLifeScore = 10;
 }
@@ -92,6 +113,10 @@ class BrickWithExtraBall : public BrickWithPickup<ExtraBallPickup> {
 public:
   BrickWithExtraBall(GameEngine* engine, const Vector2& center, GameManager* manager) :
       Brick(engine, center, manager, kBrickWithExtraBallScore) {}
+
+  void draw(Canvas* canvas) const override {
+    canvas->draw_box(center(), width(), height(), Color::DarkRed);
+  };
 
 private:
   static constexpr kBrickWithExtraBallScore = 10;

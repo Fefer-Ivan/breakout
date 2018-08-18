@@ -1,4 +1,5 @@
 #pragma once
+#include "canvas.h"
 #include "game_objects/brick.h"
 #include "game_objects/game_manager.h"
 #include "game_objects/projectile.h"
@@ -16,6 +17,10 @@ public:
   void on_death() override {
     game_manager_->on_ball_killed();
   }
+
+  void draw(Canvas* canvas) const override {
+    canvas->draw_box(center(), width(), height(), Color::White);
+  };
 
   static constexpr double kBallWidth = 1;
   static constexpr double kBallHeight = 1;

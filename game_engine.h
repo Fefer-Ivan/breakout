@@ -1,5 +1,7 @@
 #pragma once
+#include "canvas.h"
 #include "seconds.h"
+#include "vector2.h"
 #include <memory>
 #include <vector>
 #include <QColor>
@@ -9,6 +11,7 @@ namespace breakout {
 class GameObject;
 class DynamicBoxCollider;
 class StaticBoxCollider;
+class Canvas;
 
 class GameEngine {
 public:
@@ -27,12 +30,33 @@ public:
 
 protected:
   void run_main_loop();
+  void draw(Canvas * canvas);
 
 private:
+  static constexpr double kGameFieldWidth = 100;
+  static constexpr double kGameFieldHeight = 100;
+
+  class CoordinatesTransformCanvasWrapper : public Canvas {
+  public:
+    CoordinatesTransformCanvasWrapper(Canvas* canvas) :
+        Canvas(kGameFieldWidth, kGameFieldHeight),
+        canvas_(canvas) {}
+
+    void draw_box(Vector2 center, double width, double height, Color color) override;
+    void draw_text(Vector2 position, const std::string& text, Color color) override;
+
+  private:
+    Vector2 to_screen_vector(Vector2 v) const;
+    double to_screen_width(double height) const;
+    double to_screen_height(double width) const;
+
+    Canvas* canvas_;
+  };
+
   void update(const Seconds& time_delta);
 
   void handle_collisions();
-  void handle_dymanic_collisions(std::shared_ptr<DynamicBoxCollider>& lhs_collider, size_t rhs_last_index);
+  void handle_dynamic_collisions(std::shared_ptr<DynamicBoxCollider>& lhs_collider, size_t rhs_last_index);
   void handle_static_collisions(std::shared_ptr<DynamicBoxCollider>& lhs_collider);
 
   void remove_dead_objects();
@@ -53,6 +77,10 @@ public:
   void run() {
     create_initial_game_objects();
     run_main_loop();
+  }
+
+  void draw(Canvas* canvas) {
+    GameEngine::draw(canvas);
   }
 
 private:

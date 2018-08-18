@@ -45,7 +45,7 @@ void MainWindow::render_now() {
   QPaintDevice* device = backing_store_->paintDevice();
   QPainter painter(device);
 
-  painter.fillRect(0, 0, width(), height(), Qt::white);
+  painter.fillRect(0, 0, width(), height(), Qt::black);
   render(&painter);
   painter.end();
 

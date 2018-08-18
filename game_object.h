@@ -4,6 +4,7 @@
 namespace breakout {
 
 class GameEngine;
+class Canvas;
 
 class GameObject {
 public:
@@ -12,7 +13,7 @@ public:
 
   virtual void update(Seconds /*time_delta*/) {};
   virtual void on_death() {};
-  virtual void draw() const {};
+  virtual void draw(Canvas* /*canvas*/) const {};
 
   void kill() {
     if (!dead_) {

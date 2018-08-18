@@ -46,6 +46,46 @@ void GameEngine::run_main_loop() {
   }
 }
 
+void GameEngine::draw(Canvas* canvas) {
+  CoordinatesTransformCanvasWrapper game_engine_canvas(canvas);
+  for (const auto& game_object : game_objects_) {
+    game_object->draw(&game_engine_canvas);
+  }
+}
+
+void GameEngine::CoordinatesTransformCanvasWrapper::draw_box(
+    Vector2 center,
+    double width,
+    double height,
+    Color color) {
+  canvas_->draw_box(
+      to_screen_vector(center),
+      to_screen_width(width),
+      to_screen_height(height),
+      color);
+}
+
+void GameEngine::CoordinatesTransformCanvasWrapper::draw_text(
+    Vector2 position,
+    const std::string& text,
+    Color color) {
+  canvas_->draw_text(to_screen_vector(position), text, color);
+}
+
+Vector2 GameEngine::CoordinatesTransformCanvasWrapper::to_screen_vector(Vector2 v) const {
+  return Vector2(
+    v.x() / kGameFieldWidth * canvas_->width(),
+    (kGameFieldHeight - v.y()) / kGameFieldHeight * canvas_->height());
+}
+
+double GameEngine::CoordinatesTransformCanvasWrapper::to_screen_width(double engine_width) const {
+  return engine_width / kGameFieldWidth * canvas_->width();
+}
+
+double GameEngine::CoordinatesTransformCanvasWrapper::to_screen_height(double engine_height) const {
+  return engine_height / kGameFieldHeight * canvas_->height();
+}
+
 void GameEngine::update(const Seconds& time_delta) {
   for (auto& game_object : game_objects_) {
     game_object->update(time_delta);
@@ -55,12 +95,12 @@ void GameEngine::update(const Seconds& time_delta) {
 void GameEngine::handle_collisions() {
   for (size_t lhs_collider_index = 0; lhs_collider_index < dynamic_colliders_.size(); ++lhs_collider_index) {
     auto& lhs_collider = dynamic_colliders_[lhs_collider_index];
-    handle_dymanic_collisions(lhs_collider, lhs_collider_index);
+    handle_dynamic_collisions(lhs_collider, lhs_collider_index);
     handle_static_collisions(lhs_collider);
   }
 }
 
-void GameEngine::handle_dymanic_collisions(std::shared_ptr<DynamicBoxCollider>& lhs_collider, size_t rhs_last_index) {
+void GameEngine::handle_dynamic_collisions(std::shared_ptr<DynamicBoxCollider>& lhs_collider, size_t rhs_last_index) {
   handle_collisions_range(
       lhs_collider,
       dynamic_colliders_.begin(),

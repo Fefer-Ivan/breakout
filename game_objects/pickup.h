@@ -25,16 +25,6 @@ private:
   GameManager* game_manager_;
 };
 
-class ExtraLifePickup : public Pickup {
-public:
-  ExtraLifePickup(GameEngine* engine, const Vector2& center, GameManager* manager) :
-      Pickup(engine, center, manager) {}
-
-  void on_collected(Player* /*player*/) override {
-    game_manager()->add_lives(1);
-  }
-};
-
 class ExtraScorePickup : public Pickup {
 public:
   ExtraScorePickup(GameEngine* engine, const Vector2& center, GameManager* manager) :
@@ -44,8 +34,26 @@ public:
     game_manager()->add_score(kPickupExtraScore);
   }
 
+  void draw(Canvas* canvas) const override {
+    canvas->draw_box(center(), width(), height(), Color::DarkGreen);
+  };
+
 private:
   static constexpr size_t kPickupExtraScore = 100;
+};
+
+class ExtraLifePickup : public Pickup {
+public:
+  ExtraLifePickup(GameEngine* engine, const Vector2& center, GameManager* manager) :
+      Pickup(engine, center, manager) {}
+
+  void on_collected(Player* /*player*/) override {
+    game_manager()->add_lives(1);
+  }
+
+  void draw(Canvas* canvas) const override {
+    canvas->draw_box(center(), width(), height(), Color::DarkYellow);
+  };
 };
 
 class ExtraBallPickup : public Pickup {
@@ -60,6 +68,10 @@ public:
           player.center().y() + player.height() / 2 + kBallHeight),
         game_manager());
   }
+
+  void draw(Canvas* canvas) const override {
+    canvas->draw_box(center(), width(), height(), Color::DarkRed);
+  };
 };
 
 }  // namespace breakout

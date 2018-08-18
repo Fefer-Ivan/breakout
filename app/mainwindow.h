@@ -8,7 +8,7 @@ class MainWindow : public QWindow {
 public:
 	explicit MainWindow(QWindow* parent = nullptr);
 
-	virtual void render(QPainter* painter);
+	void render(QPainter* painter);
 
 public slots:
 	void render_later();

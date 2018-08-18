@@ -13,6 +13,14 @@ public:
     // TODO(ivanfefer): implement controls
   }
 
+  void on_collision(GameObject* /*game_object*/) {
+    // TODO(ivanfefer): prevent going out of bounds
+  }
+
+  void draw(Canvas* canvas) const override {
+    canvas->draw_box(center(), width(), height(), Color::DarkGreen);
+  };
+
 private:
   static constexpr double kPlayerWidth = 30;
   static constexpr double kPlayerHeight = 3;
