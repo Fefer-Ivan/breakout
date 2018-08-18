@@ -2,9 +2,10 @@
 #include "canvas.h"
 #include "seconds.h"
 #include "vector2.h"
+#include <list>
 #include <memory>
-#include <vector>
 #include <mutex>
+#include <vector>
 
 namespace breakout {
 
@@ -66,7 +67,7 @@ private:
   void add_collider_if_needed(const std::shared_ptr<GameObject>& game_object);
 
   bool stopped_;
-  std::vector<std::shared_ptr<GameObject>> game_objects_;
+  std::list<std::shared_ptr<GameObject>> game_objects_;
   std::vector<std::shared_ptr<DynamicBoxCollider>> dynamic_colliders_;
   std::vector<std::shared_ptr<StaticBoxCollider>> static_colliders_;
   mutable std::mutex draw_reset_mutex_;

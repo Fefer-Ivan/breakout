@@ -125,7 +125,7 @@ void GameEngine::handle_static_collisions(std::shared_ptr<DynamicBoxCollider>& l
 }
 
 void GameEngine::remove_dead_objects() {
-  remove_if(game_objects_, [] (const auto& game_object) { return game_object->is_dead(); });
+  game_objects_.remove_if([] (const auto& game_object) { return game_object->is_dead(); });
   remove_if(static_colliders_, [] (const auto& game_object) { return game_object->is_dead(); });
   remove_if(dynamic_colliders_, [] (const auto& game_object) { return game_object->is_dead(); });
 }
