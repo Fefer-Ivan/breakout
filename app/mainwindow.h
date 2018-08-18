@@ -1,24 +1,27 @@
 #pragma once
-#include <QMainWindow>
-#include <memory>
-
-namespace Ui {
-
-class MainWindow;
-
-}  // namespace Ui
+#include <QtGui>
 
 namespace breakout {
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QWindow {
+	Q_OBJECT
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+	explicit MainWindow(QWindow* parent = nullptr);
+
+	virtual void render(QPainter* painter);
+
+public slots:
+	void render_later();
+	void render_now();
+
+protected:
+	bool event(QEvent* event) override;
+
+	void resizeEvent(QResizeEvent* event) override;
+	void exposeEvent(QExposeEvent* event) override;
 
 private:
-    std::unique_ptr<Ui::MainWindow> ui;
+	QBackingStore* backing_store_;
 };
 
 }  // namespace breakout
