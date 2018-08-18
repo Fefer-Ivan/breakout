@@ -29,8 +29,8 @@ QColor to_qcolor(Color color) {
 void QCanvas::draw_box(Vector2 center, double width, double height, Color color) {
   painter_->setPen(to_qcolor(color));
   painter_->drawRect(
-      static_cast<int>(center.x()),
-      static_cast<int>(center.y()),
+      static_cast<int>(center.x() - width / 2),
+      static_cast<int>(center.y() - height / 2),
       static_cast<int>(width),
       static_cast<int>(height));
 }

@@ -9,11 +9,11 @@ public:
   Player(GameEngine* engine, const Vector2& center) :
       DynamicBoxCollider(engine, center, kPlayerWidth, kPlayerHeight, Vector2(0, 0)) {}
 
-  void update(Seconds /*time_delta*/) {
+  void update(Seconds /*time_delta*/) override {
     // TODO(ivanfefer): implement controls
   }
 
-  void on_collision(GameObject* /*game_object*/) {
+  void on_collision(GameObject* /*game_object*/) override {
     // TODO(ivanfefer): prevent going out of bounds
   }
 

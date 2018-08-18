@@ -31,6 +31,7 @@ void handle_collisions_range(
 GameEngine::~GameEngine() = default;
 
 void GameEngine::run_main_loop() {
+  stopped_ = false;
   Timer timer;
   while (!stopped_ && !game_objects_.empty()) {
     auto time_delta = std::min(kMaxTimeDelta, timer.get_duration_and_restart());

@@ -9,7 +9,7 @@ namespace breakout {
 class Ball : public Projectile<Brick> {
 public:
   Ball(GameEngine* engine, const Vector2& center, GameManager* manager) :
-      DynamicBoxCollider(engine, center, kBallWidth, kBallHeight, Vector2(kBallSpeed, kBallSpeed)),
+      Projectile(engine, center, kBallWidth, kBallHeight, Vector2(kBallSpeed, kBallSpeed)),
       game_manager_(manager) {
     game_manager_->on_ball_added();
   }
@@ -29,6 +29,6 @@ private:
   static constexpr double kBallSpeed = 5;
 
   GameManager* game_manager_;
-}
+};
 
 }  // namespace breakout

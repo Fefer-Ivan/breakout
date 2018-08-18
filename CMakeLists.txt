@@ -12,7 +12,7 @@ set(CMAKE_AUTOUIC ON)
 file(GLOB LIB_SOURCES "*.cpp")
 file(GLOB GAME_OBJECTS_SOURCES "game_objects/*.cpp")
 add_library(breakout_lib ${LIB_SOURCES} ${GAME_OBJECTS_SOURCES})
-target_link_libraries(breakout_lib)
+target_link_libraries(breakout_lib pthread)
 
 find_package(Qt5Widgets)
 

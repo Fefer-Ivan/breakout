@@ -16,6 +16,7 @@ class Canvas;
 
 class GameEngine {
 public:
+  GameEngine() : stopped_(false) {}
   ~GameEngine();
 
   void stop() {
