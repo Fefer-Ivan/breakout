@@ -12,12 +12,6 @@ namespace {
 
 constexpr Seconds kMaxTimeDelta = 0.06s;
 
-template<typename Container, typename Predicate>
-void remove_if(Container& container, const Predicate& predicate) {
-  auto new_end = std::remove_if(std::begin(container), std::end(container), predicate);
-  container.erase(new_end, container.end());
-}
-
 template<typename LhsColliderPtr, typename RhsColliderIt>
 void handle_collisions_range(
     LhsColliderPtr& lhs_collider,
@@ -47,7 +41,7 @@ void GameEngine::run_main_loop() {
 }
 
 void GameEngine::draw(Canvas* canvas) const {
-  std::lock_guard<std::mutex> lock_guard(draw_reset_mutex_);
+  std::lock_guard<std::mutex> lock_guard(game_object_removal_mutex_);
 
   CoordinatesTransformCanvasWrapper game_engine_canvas(canvas);
   for (const auto& game_object : game_objects_) {
@@ -95,26 +89,28 @@ void GameEngine::update(const Seconds& time_delta) {
 }
 
 void GameEngine::reset() {
-  std::lock_guard<std::mutex> lock_guard(draw_reset_mutex_);
-
+  std::lock_guard<std::mutex> lock_guard(game_object_removal_mutex_);
   game_objects_.clear();
   dynamic_colliders_.clear();
   static_colliders_.clear();
 }
 
 void GameEngine::handle_collisions() {
-  for (size_t lhs_collider_index = 0; lhs_collider_index < dynamic_colliders_.size(); ++lhs_collider_index) {
-    auto& lhs_collider = dynamic_colliders_[lhs_collider_index];
+  size_t lhs_collider_index = 0;
+  for (auto& lhs_collider : dynamic_colliders_) {
     handle_dynamic_collisions(lhs_collider, lhs_collider_index);
     handle_static_collisions(lhs_collider);
+    lhs_collider_index++;
   }
 }
 
-void GameEngine::handle_dynamic_collisions(std::shared_ptr<DynamicBoxCollider>& lhs_collider, size_t rhs_last_index) {
+void GameEngine::handle_dynamic_collisions(
+    std::shared_ptr<DynamicBoxCollider>& lhs_collider,
+    size_t rhs_last_index) {
   handle_collisions_range(
       lhs_collider,
       dynamic_colliders_.begin(),
-      dynamic_colliders_.begin() + static_cast<ptrdiff_t>(rhs_last_index));
+      std::next(dynamic_colliders_.begin(), static_cast<ptrdiff_t>(rhs_last_index)));
 }
 
 void GameEngine::handle_static_collisions(std::shared_ptr<DynamicBoxCollider>& lhs_collider) {
@@ -125,9 +121,10 @@ void GameEngine::handle_static_collisions(std::shared_ptr<DynamicBoxCollider>& l
 }
 
 void GameEngine::remove_dead_objects() {
+  std::lock_guard<std::mutex> lock_guard(game_object_removal_mutex_);
   game_objects_.remove_if([] (const auto& game_object) { return game_object->is_dead(); });
-  remove_if(static_colliders_, [] (const auto& game_object) { return game_object->is_dead(); });
-  remove_if(dynamic_colliders_, [] (const auto& game_object) { return game_object->is_dead(); });
+  static_colliders_.remove_if([] (const auto& game_object) { return game_object->is_dead(); });
+  dynamic_colliders_.remove_if([] (const auto& game_object) { return game_object->is_dead(); });
 }
 
 void GameEngine::register_game_object(std::shared_ptr<GameObject> game_object) {

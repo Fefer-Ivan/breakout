@@ -68,9 +68,9 @@ private:
 
   bool stopped_;
   std::list<std::shared_ptr<GameObject>> game_objects_;
-  std::vector<std::shared_ptr<DynamicBoxCollider>> dynamic_colliders_;
-  std::vector<std::shared_ptr<StaticBoxCollider>> static_colliders_;
-  mutable std::mutex draw_reset_mutex_;
+  std::list<std::shared_ptr<DynamicBoxCollider>> dynamic_colliders_;
+  std::list<std::shared_ptr<StaticBoxCollider>> static_colliders_;
+  mutable std::mutex game_object_removal_mutex_;
 };
 
 class GameEngineRunner : protected GameEngine {
