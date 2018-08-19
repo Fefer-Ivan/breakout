@@ -41,10 +41,11 @@ Code files from basic to more complex:
 
 * game_objects/ directory - contains various game objects: ball, player pad, bricks, pickups. One relativly special game object is GameManager which stores player lifes and score.
 
-* game_engine.h - THE game engine class. Responsable for the game main loop/ While the game is not stopped. 
-1. Call all update functions
-2. Check for collisions and call on_collision.
-3. Remove killed game objects.
+* game_engine.h - THE game engine class. Responsable for the game main loop.
+ While the game is not stopped:
+ 1. Call all update functions
+ 2. Check for collisions and call on_collision.
+ 3. Remove killed game objects.
 
 * game_runner.h - Class that initializes game objects, forming the only level of the game, and starts the engine.
 
