@@ -10,6 +10,9 @@ public:
     game_manager_->on_brick_killed(score_);
   }
 
+  static constexpr double kBrickWidth = 5;
+  static constexpr double kBrickHeight = 5;
+
 protected:
   Brick(GameEngine* engine, const Vector2& center, GameManager* manager, size_t score) :
       StaticBoxCollider(engine, center, kBrickWidth, kBrickHeight),
@@ -23,9 +26,6 @@ protected:
   }
 
 private:
-  static constexpr double kBrickWidth = 10;
-  static constexpr double kBrickHeight = 10;
-
   GameManager* game_manager_;
   size_t score_;
 };

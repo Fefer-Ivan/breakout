@@ -8,7 +8,7 @@ class Canvas;
 
 class GameObject {
 public:
-  GameObject(GameEngine* game_engine) : game_engine_(game_engine), dead_(false) {}
+  explicit GameObject(GameEngine* game_engine) : game_engine_(game_engine), dead_(false) {}
   virtual ~GameObject() = default;
 
   virtual void update(Seconds /*time_delta*/) {};

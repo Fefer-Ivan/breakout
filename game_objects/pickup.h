@@ -18,8 +18,8 @@ public:
   }
 
 private:
-  static constexpr double kPickupWidth = 5;
-  static constexpr double kPickupHeight = 5;
+  static constexpr double kPickupWidth = 2;
+  static constexpr double kPickupHeight = 2;
   static constexpr double kPickupSpeed = 3;
 
   GameManager* game_manager_;
@@ -62,11 +62,7 @@ public:
       Pickup(engine, center, manager) {}
 
   void on_collection(Player* player) override {
-    game_engine()->create_game_object<Ball>(
-        Vector2(
-          player->center().x(),
-          player->center().y() + player->height() / 2 + Ball::kBallHeight),
-        game_manager());
+    player->create_ball();
   }
 
   void draw(Canvas* canvas) const override {

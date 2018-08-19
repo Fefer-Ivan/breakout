@@ -26,7 +26,7 @@ public:
   static constexpr double kBallHeight = 1;
 
 private:
-  static constexpr double kBallSpeed = 5;
+  static constexpr double kBallSpeed = 50;
 
   GameManager* game_manager_;
 };
