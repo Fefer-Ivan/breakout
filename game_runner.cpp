@@ -17,7 +17,8 @@ GameRunner::GameRunner(std::unique_ptr<InputManager> input_manager) :
     GameEngineRunner(std::move(input_manager)),
     game_running_(false),
     lifes_(kStartLifes),
-    score_(0) {}
+    score_(0),
+    highscore_(0) {}
 
 GameRunner::~GameRunner() {
   stop();
@@ -31,7 +32,10 @@ void GameRunner::start() {
       reset();
       lifes_ = game_manager_->live_count();
       score_ = game_manager_->score();
-      std::clog << "level finished with lifes " << lifes_ << " score " << score_ << std::endl;
+      highscore_ = game_manager_->highscore();
+      std::clog << "level finished with lifes " << lifes_ <<
+          " score " << score_ <<
+          " highscore " << highscore_ << std::endl;
       if (lifes_ == 0) {
         lifes_ = kStartLifes;
         score_ = 0;
@@ -49,7 +53,7 @@ void GameRunner::stop() {
 }
 
 void GameRunner::create_initial_game_objects() {
-  game_manager_ = create_game_object<GameManager>(lifes_, score_);
+  game_manager_ = create_game_object<GameManager>(lifes_, score_, highscore_);
   create_bounding_box();
   create_texts(game_manager_.get());
   create_player_and_ball(game_manager_.get());
@@ -64,8 +68,9 @@ void GameRunner::create_bounding_box() {
 }
 
 void GameRunner::create_texts(GameManager* game_manager) {
-  create_game_object<LivesText>(Vector2(1, 10), game_manager);
-  create_game_object<ScoreText>(Vector2(1, 12), game_manager);
+  create_game_object<LivesText>(Vector2(1, 12), game_manager);
+  create_game_object<ScoreText>(Vector2(1, 10), game_manager);
+  create_game_object<HighscoreText>(Vector2(1, 8), game_manager);
 }
 
 void GameRunner::create_player_and_ball(GameManager* game_manager) {

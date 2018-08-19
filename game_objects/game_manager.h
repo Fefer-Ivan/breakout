@@ -7,10 +7,11 @@ class Player;
 
 class GameManager : public GameObject {
 public:
-  GameManager(GameEngine* game_engine, size_t live_count, size_t score) :
+  GameManager(GameEngine* game_engine, size_t live_count, size_t score, size_t highscore) :
       GameObject(game_engine),
       live_count_(live_count),
       score_(score),
+      highscore_(highscore),
       brick_count_(0),
       ball_count_(0),
       player_(nullptr) {}
@@ -23,9 +24,13 @@ public:
     return score_;
   }
 
+  size_t highscore() const {
+    return highscore_;
+  }
+
   void set_player(Player* player) {
     player_ = player;
-  };
+  }
 
   void add_score(size_t score);
   void add_lives(size_t lives);
@@ -39,6 +44,7 @@ public:
 private:
   size_t live_count_;
   size_t score_;
+  size_t highscore_;
   size_t brick_count_;
   size_t ball_count_;
 

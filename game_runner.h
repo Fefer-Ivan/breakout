@@ -34,6 +34,7 @@ private:
   std::shared_ptr<GameManager> game_manager_;
   size_t lifes_;
   size_t score_;
+  size_t highscore_;
   std::unique_ptr<std::thread> game_thread_;
 };
 

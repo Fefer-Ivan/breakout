@@ -1,10 +1,14 @@
 #include "game_objects/game_manager.h"
+#include "game_objects/player.h"
 #include "game_engine.h"
 
 namespace breakout {
 
 void GameManager::add_score(size_t score) {
   score_ += score;
+  if (highscore_ < score_) {
+    highscore_ = score_;
+  }
 }
 
 void GameManager::add_lives(size_t lives) {

@@ -18,4 +18,18 @@ private:
   GameManager* game_manager_;
 };
 
+class HighscoreText : public Text {
+public:
+  HighscoreText(GameEngine* game_engine, Vector2 position, GameManager* game_manager) :
+      Text(game_engine, position),
+      game_manager_(game_manager) {}
+
+private:
+  std::string get_text() const override {
+    return "highscore: " + std::to_string(game_manager_->highscore());
+  }
+
+  GameManager* game_manager_;
+};
+
 }  // namespace breakout
