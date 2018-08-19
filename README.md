@@ -4,7 +4,6 @@ To build the game engine, C++17 compiler is required (g++-7 or clang-5.0).
 The game application require qt-5 and tests require gtest.
 
 CMakeLists.txt file is provided, so to build the game just run cmake and then make command.
-I usually create build directory for it.
 ```
 mkdir build
 cd build
