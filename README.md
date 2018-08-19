@@ -5,7 +5,7 @@ Simple Breakout game prototype.
 The player control the white pad with A/D and left/right arrow keys.
 
 White balls (a little squarely balls) fly around and destroy bricks on contact. If white ball reaches bottom of the screen, it is destroyed. 
-If the last white ball is destroyed, player loses one life and a new ball is created. When no lifes left the game is restarted.
+If the last white ball is destroyed, player loses one life and a new ball is created. When no lives left the game is restarted.
 
 The goal is to earn as many points as possible by destroying bricks. 
 * Green bricks cost 10 points.
@@ -13,17 +13,17 @@ The goal is to earn as many points as possible by destroying bricks.
 * Red bricks cost 50 points.
 
 Darker bricks spawn pickups when destroyed. Pickups can be picked up with the pad.
-* Green pickup gives 100 poins.
+* Green pickup gives 100 points.
 * Yellow pickup gives extra life.
 * Red pickup spawns new white ball.
 
-When all bricks are destroyed, game is restarted, but player keeps his score and lifes.
+When all bricks are destroyed, game is restarted, but player keeps his score and lives.
 
 
 ### The Engine
 
 The game engine library is written on C++17 without using any external libraries.
-The application is written using Qt, but it is completly isolated from the engine with interfaces.
+The application is written using Qt, but it is completely isolated from the engine with interfaces.
 The tests are written using gtest library.
 
 Code files from basic to more complex:
@@ -40,11 +40,11 @@ Code files from basic to more complex:
 
 * game_object.h - interface for a basic game object. Has update(Seconds time_delta), draw(), on_death() and kill() virtual methods. 
 
-* box_collider.h - BoxCollider class, derived from GameObject, responsable for detecting collisions. Has on_collision() virtual method.
+* box_collider.h - BoxCollider class, derived from GameObject, responsible for detecting collisions. Has on_collision() virtual method.
 
-* game_objects/ directory - contains various game objects: ball, player pad, bricks, pickups. One relativly special game object is GameManager which stores player lifes and score.
+* game_objects/ directory - contains various game objects: ball, player pad, bricks, pickups. One relatively special game object is GameManager which stores player lives and score.
 
-* game_engine.h - THE game engine class. Responsable for the game main loop.
+* game_engine.h - THE game engine class. Responsible for the game main loop.
     While the game is not stopped:
     1. Call update function for all GameObjects.
     2. Check for collisions and call on_collision.
@@ -60,7 +60,8 @@ Code files from basic to more complex:
 
 There are a lot room for improvements:
 1. As all colliders are squares that are parallel to the axis, collision detection can be optimized.
-2. Support continious collision detection for fast objects.
+2. Support continuous collision detection for fast objects.
 3. Support collision masks: simple way to specify what collisions should be ignored.
 4. Now all "physics" is written in Projectile class as it is the only class that need it. It can be generalized and put into separate class.
 5. Test coverage can be improved. Now only basic classes are covered. 
+
