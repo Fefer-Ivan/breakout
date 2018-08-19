@@ -1,4 +1,4 @@
-- Breakout
+- The Game
 
 Simple Breakout game prototype.
 
@@ -18,3 +18,34 @@ Yellow pickup gives extra life.
 Red pickup spawns new white ball.
 
 When all bricks are destroyed, game is restarted, but player keeps his score and lifes.
+
+- The Engine
+
+The game engine is written on C++17 without using any external libraries. The application is written using Qt library, but it is completly isolated from the engine with interfaces.
+
+Code files from basic to more complex:
+
+* seconds.h - Seconds - std::chrono::duration template specialization, used across the engine.
+
+* timer.h - Timer class for measuring time between updates.
+
+* vector2.h - Vector class representing 2d vector or point.
+
+* canvas.h - Canvas interface for rendering game objects
+
+* input_manager.h - InputManager interface for getting input from user.
+
+* game_object.h - interface for a basic game object. Has update(Seconds time_delta), draw(), on_death() and kill() virtual methods. 
+
+* box_collider.h - BoxCollider class, derived from GameObject, responsable for detecting collisions. Has on_collision() virtual method.
+
+* game_objects/ directory - contains various game objects: ball, player pad, bricks, pickups. One relativly special game object is GameManager which stores player lifes and score.
+
+* game_engine.h - THE game engine class. Responsable for the game main loop/ While the game is not stopped. 
+1. Call all update functions
+2. Check for collisions and call on_collision.
+3. Remove killed game objects.
+
+* game_runner.h - Class that initializes game objects, forming the only level of the game, and starts the engine.
+
+* app/ directory contains Qt application with the game. It has QCanvas - implementation of Canvas interface and QInputManager - implementation of InputManager interface.
