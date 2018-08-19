@@ -68,3 +68,4 @@ There are a lot room for improvements:
 5. Test coverage can be improved. Now only basic classes are covered. 
 6. Now there is only one hardcoded level. It can be great to create an interface for loading different levels.
 7. All parameters like sizes, colors and velocities of objects are hardcoded constants. It should be separated from code in some kind of config file.
+8. There is no persistence - highscore is reset every time the game is closed. It should be saved in some file and loaded on start.
