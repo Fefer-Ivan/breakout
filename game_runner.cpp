@@ -61,10 +61,10 @@ void GameRunner::create_initial_game_objects() {
 }
 
 void GameRunner::create_bounding_box() {
-  create_game_object<StaticBoxCollider>(Vector2(-0.5, kGameFieldHeight / 2), 1, kGameFieldHeight);
-  create_game_object<StaticBoxCollider>(Vector2(kGameFieldWidth + 0.5, kGameFieldHeight / 2), 1, kGameFieldHeight);
-  create_game_object<StaticBoxCollider>(Vector2(kGameFieldWidth / 2, kGameFieldHeight + 0.5), kGameFieldWidth, 1);
-  create_game_object<DeathZone>(Vector2(kGameFieldWidth / 2, -0.5), kGameFieldWidth, 1);
+  create_game_object<StaticBoxCollider>(Vector2(-0.5, kGameFieldHeight / 2), 1, 2 * kGameFieldHeight);
+  create_game_object<StaticBoxCollider>(Vector2(kGameFieldWidth + 0.5, kGameFieldHeight / 2), 1, 2 * kGameFieldHeight);
+  create_game_object<StaticBoxCollider>(Vector2(kGameFieldWidth / 2, kGameFieldHeight + 0.5), 2 * kGameFieldWidth, 1);
+  create_game_object<DeathZone>(Vector2(kGameFieldWidth / 2, -5), 2 * kGameFieldWidth, 1);
 }
 
 void GameRunner::create_texts(GameManager* game_manager) {
