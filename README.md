@@ -21,7 +21,9 @@ When all bricks are destroyed, game is restarted, but player keeps his score and
 
 - The Engine
 
-The game engine is written on C++17 without using any external libraries. The application is written using Qt library, but it is completly isolated from the engine with interfaces.
+The game engine library is written on C++17 without using any external libraries.
+The application is written using Qt, but it is completly isolated from the engine with interfaces.
+The tests are written using gtest library.
 
 Code files from basic to more complex:
 
@@ -43,10 +45,18 @@ Code files from basic to more complex:
 
 * game_engine.h - THE game engine class. Responsable for the game main loop.
     While the game is not stopped:
-    1. Call all update functions
+    1. Call update function for all GameObjects.
     2. Check for collisions and call on_collision.
     3. Remove killed game objects.
 
 * game_runner.h - Class that initializes game objects, forming the only level of the game, and starts the engine.
 
 * app/ directory contains Qt application with the game. It has QCanvas - implementation of Canvas interface and QInputManager - implementation of InputManager interface.
+
+- Comments
+There are a lot room for improvements:
+1. As all colliders are squares that are parallel to the axis, collision detection can be optimized.
+2. Support continious collision detection for fast objects.
+3. Support collision masks: simple way to specify what collisions should be ignored.
+4. Now all "physics" is written in Projectile class as it is the only class that need it. It can be generalized and put into separate class.
+5. Test coverage can be improved. Now only basic classes are covered. 
