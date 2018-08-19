@@ -6,6 +6,8 @@
 
 namespace breakout {
 
+class Player;
+
 class Ball : public Projectile<Brick> {
 public:
   Ball(GameEngine* engine, const Vector2& center, GameManager* manager) :
@@ -13,6 +15,8 @@ public:
       game_manager_(manager) {
     game_manager_->on_ball_added();
   }
+
+  void on_collision(GameObject* game_object) override;
 
   void on_death() override {
     game_manager_->on_ball_killed();
@@ -27,6 +31,9 @@ public:
 
 private:
   static constexpr double kBallSpeed = 50;
+
+  bool should_ignore_collision(const GameObject* game_object) const;
+  void on_player_collision(const Player* player);
 
   GameManager* game_manager_;
 };
