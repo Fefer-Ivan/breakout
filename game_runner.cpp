@@ -91,7 +91,7 @@ void GameRunner::create_brick_row(double y, GameManager* game_manager) {
   size_t brick_count = static_cast<size_t>(kGameFieldWidth / brick_width +
       std::numeric_limits<double>::epsilon());
   for (size_t brick_index = 0; brick_index < brick_count; ++brick_index) {
-    double x = brick_width / 2 + brick_index * brick_width;
+    double x = brick_width / 2 + static_cast<double>(brick_index) * brick_width;
     if (brick_index % 5 == 2) {
       create_game_object<PickupBrick>(Vector2(x, y), game_manager);
     } else {

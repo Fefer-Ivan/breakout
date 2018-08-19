@@ -1,3 +1,19 @@
+## Building and running
+
+To build the game engine, C++17 compiler is required (g++-7 or clang-5.0).
+The game application require qt-5 and tests require gtest.
+
+CMakeLists.txt file is provided, so to build the game just run cmake and then make command.
+```
+cmake && make
+```
+
+To run the game, run breakout binary
+```
+./breakout
+```
+
+
 ### The Game
 
 Simple Breakout game prototype.

@@ -1,5 +1,6 @@
 #include "qcanvas.h"
 #include <QtGui>
+#include <iostream>
 
 namespace breakout {
 
@@ -22,6 +23,8 @@ QColor to_qcolor(Color color) {
     case Color::DarkRed:
       return Qt::darkRed;
   }
+  std::clog << "unknown color: " << static_cast<size_t>(color);
+  return Qt::black;
 }
 
 }  // namespace
