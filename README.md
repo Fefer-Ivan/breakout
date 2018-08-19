@@ -54,6 +54,7 @@ Code files from basic to more complex:
 
 * app/ directory contains Qt application with the game. It has QCanvas - implementation of Canvas interface and QInputManager - implementation of InputManager interface.
 
+* tests/ directory contains unit tests for basic classes, game objects and a couple simple tests for game engine.
 
 ### Comments
 
