@@ -13,8 +13,11 @@
 
 namespace breakout {
 
-GameRunner::GameRunner() : game_running_(false), lifes_(kStartLifes), score_(0) {
-}
+GameRunner::GameRunner(std::unique_ptr<InputManager> input_manager) :
+    GameEngineRunner(std::move(input_manager)),
+    game_running_(false),
+    lifes_(kStartLifes),
+    score_(0) {}
 
 GameRunner::~GameRunner() {
   stop();

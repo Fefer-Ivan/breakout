@@ -5,6 +5,7 @@
 namespace breakout {
 
 class GameRunner;
+class QInputManager;
 
 class MainWindow : public QWindow {
 	Q_OBJECT
@@ -24,9 +25,13 @@ protected:
 	void resizeEvent(QResizeEvent* event) override;
 	void exposeEvent(QExposeEvent* event) override;
 
+  void keyPressEvent(QKeyEvent *event) override;
+  void keyReleaseEvent(QKeyEvent *event) override;
+
 private:
   std::unique_ptr<QBackingStore> backing_store_;
   std::unique_ptr<GameRunner> game_runner_;
+  QInputManager* input_manager_;
 };
 
 }  // namespace breakout

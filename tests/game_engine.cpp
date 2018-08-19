@@ -75,6 +75,10 @@ private:
 };
 
 class TwoDynamicBoxesInstantTestLevel : public GameEngineRunner {
+public:
+  TwoDynamicBoxesInstantTestLevel() : GameEngineRunner(nullptr) {}
+
+private:
   void create_initial_game_objects() override {
     create_game_object<DynamicSelfdestructOnCollision>(
         Vector2(0, 0), 10, 10, Vector2(0, 0), 0s);
@@ -84,6 +88,10 @@ class TwoDynamicBoxesInstantTestLevel : public GameEngineRunner {
 };
 
 class TwoDynamicBoxesMoveTestLevel : public GameEngineRunner {
+public:
+  TwoDynamicBoxesMoveTestLevel() : GameEngineRunner(nullptr) {}
+
+private:
   void create_initial_game_objects() override {
     create_game_object<DynamicSelfdestructOnCollision>(
         Vector2(0, 0), 10, 10, Vector2(50, 50), 50ms);
@@ -93,6 +101,10 @@ class TwoDynamicBoxesMoveTestLevel : public GameEngineRunner {
 };
 
 class DynamicAndStaticBoxesMoveTestLevel : public GameEngineRunner {
+public:
+  DynamicAndStaticBoxesMoveTestLevel() : GameEngineRunner(nullptr) {}
+
+private:
   void create_initial_game_objects() override {
     create_game_object<DynamicSelfdestructOnCollision>(
         Vector2(0, 0), 10, 10, Vector2(50, 50), 100ms);
@@ -102,6 +114,10 @@ class DynamicAndStaticBoxesMoveTestLevel : public GameEngineRunner {
 };
 
 class SeveralBoxesMoveTestLevel : public GameEngineRunner {
+public:
+  SeveralBoxesMoveTestLevel() : GameEngineRunner(nullptr) {}
+
+private:
   void create_initial_game_objects() override {
     create_game_object<DynamicSelfdestructOnCollision>(
         Vector2(0, 0), 10, 10, Vector2(50, 0), 100ms);

@@ -31,6 +31,10 @@ protected:
     return game_engine_;
   }
 
+  const GameEngine* game_engine() const {
+    return game_engine_;
+  }
+
 private:
   GameEngine* game_engine_;
   bool dead_;

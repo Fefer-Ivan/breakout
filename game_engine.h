@@ -1,5 +1,6 @@
 #pragma once
 #include "canvas.h"
+#include "input_manager.h"
 #include "seconds.h"
 #include "vector2.h"
 #include <list>
@@ -12,11 +13,13 @@ namespace breakout {
 class GameObject;
 class DynamicBoxCollider;
 class StaticBoxCollider;
-class Canvas;
 
 class GameEngine {
 public:
-  GameEngine() : stopped_(false) {}
+  GameEngine(std::unique_ptr<InputManager> input_manager) :
+      stopped_(false),
+      input_manager_(std::move(input_manager)) {}
+
   ~GameEngine();
 
   void stop() {
@@ -28,6 +31,10 @@ public:
     auto game_object = std::make_shared<T>(this, std::forward<Args>(args)...);
     register_game_object(game_object);
     return game_object;
+  }
+
+  const InputManager* input_manager() const {
+    return input_manager_.get();
   }
 
 protected:
@@ -68,6 +75,7 @@ private:
   void add_collider_if_needed(const std::shared_ptr<GameObject>& game_object);
 
   bool stopped_;
+  std::unique_ptr<InputManager> input_manager_;
   std::list<std::shared_ptr<GameObject>> game_objects_;
   std::list<std::shared_ptr<DynamicBoxCollider>> dynamic_colliders_;
   std::list<std::shared_ptr<StaticBoxCollider>> static_colliders_;
@@ -76,6 +84,8 @@ private:
 
 class GameEngineRunner : protected GameEngine {
 public:
+  GameEngineRunner(std::unique_ptr<InputManager> input_manager) :
+      GameEngine(std::move(input_manager)) {}
   virtual ~GameEngineRunner() = default;
 
   void run_main_loop() {

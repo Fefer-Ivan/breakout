@@ -20,7 +20,7 @@ public:
 private:
   static constexpr double kPickupWidth = 2;
   static constexpr double kPickupHeight = 2;
-  static constexpr double kPickupSpeed = 3;
+  static constexpr double kPickupSpeed = 30;
 
   GameManager* game_manager_;
 };

@@ -20,37 +20,14 @@ public:
     return score_;
   }
 
-  void add_score(size_t score) {
-    score_ += score;
-  }
+  void add_score(size_t score);
+  void add_lives(size_t lives);
 
-  void add_lives(size_t lives) {
-    live_count_ += lives;
-  }
+  void on_brick_added();
+  void on_brick_killed(size_t brick_score);
 
-  void on_brick_added() {
-    brick_count_++;
-  }
-
-  void on_brick_killed(size_t brick_score) {
-    brick_count_--;
-    add_score(brick_score);
-    if (brick_count_ == 0) {
-      game_engine()->stop();
-    }
-  }
-
-  void on_ball_added() {
-    ball_count_++;
-  }
-
-  void on_ball_killed() {
-    ball_count_--;
-    if (ball_count_ == 0) {
-      live_count_--;
-      game_engine()->stop();
-    }
-  }
+  void on_ball_added();
+  void on_ball_killed();
 
 private:
   size_t live_count_;

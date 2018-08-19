@@ -1,14 +1,18 @@
 #include "mainwindow.h"
 #include "qcanvas.h"
+#include "qinputmanager.h"
 #include "game_runner.h"
 
 namespace breakout {
 
 MainWindow::MainWindow(QWindow* parent) :
     QWindow(parent),
-    backing_store_(std::make_unique<QBackingStore>(this)),
-    game_runner_(std::make_unique<GameRunner>()) {
+    backing_store_(std::make_unique<QBackingStore>(this)) {
   resize(700, 700);
+
+  auto input_manager = std::make_unique<QInputManager>();
+  input_manager_ = input_manager.get();
+  game_runner_ = std::make_unique<GameRunner>(std::move(input_manager));
   game_runner_->start();
 }
 
@@ -39,6 +43,12 @@ void MainWindow::exposeEvent(QExposeEvent*) {
   }
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+  input_manager_->press_key(event->key());
+}
+void MainWindow::keyReleaseEvent(QKeyEvent *event) {
+  input_manager_->release_key(event->key());
+}
 
 void MainWindow::render_now() {
   if (!isExposed()) {

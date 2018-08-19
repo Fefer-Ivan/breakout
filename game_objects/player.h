@@ -10,29 +10,18 @@ public:
       DynamicBoxCollider(engine, center, kPlayerWidth, kPlayerHeight, Vector2(0, 0)),
       game_manager_(game_manager) {}
 
-  void update(Seconds /*time_delta*/) override {
-    // TODO(ivanfefer): implement controls
-  }
+  void update(Seconds time_delta) override;
 
-  void on_collision(GameObject* /*game_object*/) override {
-    // TODO(ivanfefer): prevent going out of bounds
-  }
+  void on_collision(GameObject* game_object) override;
 
-  void draw(Canvas* canvas) const override {
-    canvas->draw_box(center(), width(), height(), Color::DarkGreen);
-  };
+  void draw(Canvas* canvas) const override;
 
-  void create_ball() {
-    game_engine()->create_game_object<Ball>(
-        Vector2(
-            center().x(),
-            center().y() + height() / 2 + Ball::kBallHeight),
-        game_manager_);
-  }
+  void create_ball();
 
 private:
   static constexpr double kPlayerWidth = 20;
   static constexpr double kPlayerHeight = 3;
+  static constexpr double kPlayerSpeed = 40;
 
   GameManager* game_manager_;
 };
