@@ -4,7 +4,7 @@ Simple Breakout game prototype.
 
 The player control the white pad with A/D and left/right arrow keys.
 
-White balls (a li fly around and destroy bricks on contact. If white ball reaches bottom of the screen, it is destroyed. 
+White balls (a little bit squarely balls) fly around and destroy bricks on contact. If white ball reaches bottom of the screen, it is destroyed. 
 If the last white ball is destroyed, player loses one life and a new ball is created. When no lifes left the game is restarted.
 
 The goal is to earn as many points as possible by destroying bricks. 
