@@ -36,6 +36,8 @@ Code files from basic to more complex:
 
 * canvas.h - Canvas interface for rendering game objects
 
+* coordinates_transform_canvas_wrapper.h - CoordnatesTransformCanvasWrapper class that transform engine coordinates to screen coordinates
+
 * input_manager.h - InputManager interface for getting input from user.
 
 * game_object.h - interface for a basic game object. Has update(Seconds time_delta), draw(), on_death() and kill() virtual methods. 
