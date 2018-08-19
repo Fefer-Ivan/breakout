@@ -3,6 +3,8 @@
 
 namespace breakout {
 
+class Player;
+
 class GameManager : public GameObject {
 public:
   GameManager(GameEngine* game_engine, size_t live_count, size_t score) :
@@ -10,7 +12,8 @@ public:
       live_count_(live_count),
       score_(score),
       brick_count_(0),
-      ball_count_(0) {}
+      ball_count_(0),
+      player_(nullptr) {}
 
   size_t live_count() const {
     return live_count_;
@@ -19,6 +22,10 @@ public:
   size_t score() const {
     return score_;
   }
+
+  void set_player(Player* player) {
+    player_ = player;
+  };
 
   void add_score(size_t score);
   void add_lives(size_t lives);
@@ -34,6 +41,8 @@ private:
   size_t score_;
   size_t brick_count_;
   size_t ball_count_;
+
+  Player* player_;
 };
 
 }  // namespace breakout

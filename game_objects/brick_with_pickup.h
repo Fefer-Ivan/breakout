@@ -40,7 +40,7 @@ public:
   };
 
 private:
-  static constexpr size_t kBrickWithExtraLifeScore = 10;
+  static constexpr size_t kBrickWithExtraLifeScore = 20;
 };
 
 class BrickWithExtraBall : public BrickWithPickup<ExtraBallPickup> {
@@ -53,7 +53,7 @@ public:
   };
 
 private:
-  static constexpr size_t kBrickWithExtraBallScore = 10;
+  static constexpr size_t kBrickWithExtraBallScore = 50;
 };
 
 }  // namespace breakout

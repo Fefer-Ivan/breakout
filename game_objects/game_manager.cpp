@@ -31,7 +31,11 @@ void GameManager::on_ball_killed() {
   ball_count_--;
   if (ball_count_ == 0) {
     live_count_--;
-    game_engine()->stop();
+    if (live_count_ == 0) {
+      game_engine()->stop();
+    } else {
+      player_->create_ball();
+    }
   }
 }
 

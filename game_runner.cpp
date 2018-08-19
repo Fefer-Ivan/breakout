@@ -70,6 +70,7 @@ void GameRunner::create_texts(GameManager* game_manager) {
 
 void GameRunner::create_player_and_ball(GameManager* game_manager) {
   auto player = create_game_object<Player>(Vector2(kGameFieldWidth / 2, 2), game_manager);
+  game_manager->set_player(player.get());
   player->create_ball();
 }
 
