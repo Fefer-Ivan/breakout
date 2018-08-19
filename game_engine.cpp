@@ -22,7 +22,7 @@ void handle_collisions_range(
     auto& rhs_collider = *rhs_collider_first++;
     if (lhs_collider->has_collision(*rhs_collider)) {
       lhs_collider->on_collision(rhs_collider.get());
-      rhs_collider->on_collision(lhs_collider.get());
+      rhs_collider->on_collision(lhs_collider);
     }
   }
 }
@@ -108,14 +108,14 @@ void GameEngine::handle_collisions() {
 
 void GameEngine::handle_dynamic_collisions(DynamicBoxCollider* lhs_collider, size_t rhs_last_index) {
   handle_collisions_range(
-      lhs_collider.get(),
+      lhs_collider,
       dynamic_colliders_.begin(),
       std::next(dynamic_colliders_.begin(), static_cast<ptrdiff_t>(rhs_last_index)));
 }
 
 void GameEngine::handle_static_collisions(DynamicBoxCollider* lhs_collider) {
   handle_collisions_range(
-      lhs_collider.get(),
+      lhs_collider,
       static_colliders_.begin(),
       static_colliders_.end());
 }
