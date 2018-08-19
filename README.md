@@ -61,11 +61,11 @@ Code files from basic to more complex:
 ### Comments
 
 There are a lot room for improvements:
-1. As all colliders are squares that are parallel to the axis, collision detection can be optimized.
-2. Support continuous collision detection for fast objects.
-3. Support collision masks: simple way to specify what collisions should be ignored.
-4. Now all "physics" is written in Projectile class as it is the only class that need it. It can be generalized and put into separate class.
-5. Test coverage can be improved. Now only basic classes are covered. 
-6. Now there is only one hardcoded level. It can be great to create an interface for loading different levels.
-7. All parameters like sizes, colors and velocities of objects are hardcoded constants. It should be separated from code in some kind of config file.
-8. There is no persistence - highscore is reset every time the game is closed. It should be saved in some file and loaded on start.
+1. All parameters like sizes, colors and velocities of objects are hardcoded constants. It should be separated from code in some kind of config file.
+2. There is no persistence - highscore is reset every time the game is closed. It should be saved in some file and loaded on start.
+3. Now there is only one hardcoded level. It can be great to create an interface for loading different levels.
+4. Test coverage can be improved. Now only basic classes are covered.
+5. Support collision masks: simple way to specify what collisions should be ignored.
+6. Now all "physics" is written in Projectile class as it is the only class that need it. It can be generalized and put into separate class.
+7. As all colliders are squares that are parallel to the axis, collision detection can be optimized.
+8. Support continuous collision detection for fast objects.
