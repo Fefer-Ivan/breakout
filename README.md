@@ -1,4 +1,4 @@
-- The Game
+### The Game
 
 Simple Breakout game prototype.
 
@@ -20,7 +20,7 @@ Red pickup spawns new white ball.
 When all bricks are destroyed, game is restarted, but player keeps his score and lifes.
 
 
-- The Engine
+### The Engine
 
 The game engine library is written on C++17 without using any external libraries.
 The application is written using Qt, but it is completly isolated from the engine with interfaces.
@@ -55,7 +55,8 @@ Code files from basic to more complex:
 * app/ directory contains Qt application with the game. It has QCanvas - implementation of Canvas interface and QInputManager - implementation of InputManager interface.
 
 
--Comments
+### Comments
+
 There are a lot room for improvements:
 1. As all colliders are squares that are parallel to the axis, collision detection can be optimized.
 2. Support continious collision detection for fast objects.
