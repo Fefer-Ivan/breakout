@@ -28,5 +28,6 @@ Vector2 operator + (const Vector2& lhs, const Vector2& rhs);
 Vector2 operator - (const Vector2& lhs, const Vector2& rhs);
 Vector2 operator * (const Vector2& lhs, double rhs);
 Vector2 operator * (double lhs, const Vector2& rhs);
+bool operator == (const Vector2& lhs, const Vector2& rhs);
 
 }  // namespace breakout

@@ -22,7 +22,7 @@ public:
     return width_;
   }
 
-  double height() {
+  double height() const {
     return height_;
   }
 

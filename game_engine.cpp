@@ -1,3 +1,4 @@
+#include "coordinates_transform_canvas_wrapper.h"
 #include "input_manager.h"
 #include "box_collider.h"
 #include "game_engine.h"
@@ -45,43 +46,10 @@ void GameEngine::run_main_loop() {
 void GameEngine::draw(Canvas* canvas) const {
   std::lock_guard<std::mutex> lock_guard(game_object_removal_mutex_);
 
-  CoordinatesTransformCanvasWrapper game_engine_canvas(canvas);
+  CoordinatesTransformCanvasWrapper game_engine_canvas(canvas, kGameFieldWidth, kGameFieldHeight);
   for (const auto& game_object : game_objects_) {
     game_object->draw(&game_engine_canvas);
   }
-}
-
-void GameEngine::CoordinatesTransformCanvasWrapper::draw_box(
-    Vector2 center,
-    double width,
-    double height,
-    Color color) {
-  canvas_->draw_box(
-      to_screen_vector(center),
-      to_screen_width(width),
-      to_screen_height(height),
-      color);
-}
-
-void GameEngine::CoordinatesTransformCanvasWrapper::draw_text(
-    Vector2 position,
-    const std::string& text,
-    Color color) {
-  canvas_->draw_text(to_screen_vector(position), text, color);
-}
-
-Vector2 GameEngine::CoordinatesTransformCanvasWrapper::to_screen_vector(Vector2 v) const {
-  return Vector2(
-    v.x() / kGameFieldWidth * canvas_->width(),
-    (kGameFieldHeight - v.y()) / kGameFieldHeight * canvas_->height());
-}
-
-double GameEngine::CoordinatesTransformCanvasWrapper::to_screen_width(double engine_width) const {
-  return engine_width / kGameFieldWidth * canvas_->width();
-}
-
-double GameEngine::CoordinatesTransformCanvasWrapper::to_screen_height(double engine_height) const {
-  return engine_height / kGameFieldHeight * canvas_->height();
 }
 
 void GameEngine::update(const Seconds& time_delta) {

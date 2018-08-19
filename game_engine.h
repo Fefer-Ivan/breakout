@@ -47,23 +47,6 @@ protected:
   static constexpr double kGameFieldHeight = 100;
 
 private:
-  class CoordinatesTransformCanvasWrapper : public Canvas {
-  public:
-    explicit CoordinatesTransformCanvasWrapper(Canvas* canvas) :
-        Canvas(kGameFieldWidth, kGameFieldHeight),
-        canvas_(canvas) {}
-
-    void draw_box(Vector2 center, double width, double height, Color color) override;
-    void draw_text(Vector2 position, const std::string& text, Color color) override;
-
-  private:
-    Vector2 to_screen_vector(Vector2 v) const;
-    double to_screen_width(double height) const;
-    double to_screen_height(double width) const;
-
-    Canvas* canvas_;
-  };
-
   void update(const Seconds& time_delta);
 
   void handle_collisions();

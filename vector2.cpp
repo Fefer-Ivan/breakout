@@ -36,4 +36,8 @@ Vector2 operator * (double lhs, const Vector2& rhs) {
   return rhs * lhs;
 }
 
+bool operator == (const Vector2& lhs, const Vector2& rhs) {
+  return lhs.x() == rhs.x() && lhs.y() == rhs.y();
+}
+
 }  // namespace breakout
