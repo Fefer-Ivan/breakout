@@ -1,7 +1,8 @@
 #pragma once
 #include "box_collider.h"
-#include <utility>
+#include <algorithm>
 #include <cmath>
+#include <utility>
 
 namespace breakout {
 

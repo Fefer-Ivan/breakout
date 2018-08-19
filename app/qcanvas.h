@@ -1,5 +1,6 @@
 #pragma once
 #include "canvas.h"
+#include <string>
 
 class QPainter;
 

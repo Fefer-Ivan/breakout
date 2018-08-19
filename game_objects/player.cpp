@@ -26,7 +26,7 @@ void Player::on_collision(GameObject* game_object) {
 
 void Player::draw(Canvas* canvas) const {
   canvas->draw_box(center(), width(), height(), Color::White);
-};
+}
 
 void Player::create_ball() {
   game_engine()->create_game_object<Ball>(

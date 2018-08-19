@@ -13,7 +13,7 @@ class BoxCollider : public GameObject {
 public:
   bool has_collision(const BoxCollider& rhs) const;
 
-  virtual void on_collision(GameObject* /*game_object*/) {};
+  virtual void on_collision(GameObject* /*game_object*/) {}
 
   MovementType movement_type() const {
     return movement_type_;

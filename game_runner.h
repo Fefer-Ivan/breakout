@@ -11,7 +11,7 @@ class GameManager;
 
 class GameRunner : public GameEngineRunner {
 public:
-  GameRunner(std::unique_ptr<InputManager> input_manager);
+  explicit GameRunner(std::unique_ptr<InputManager> input_manager);
   ~GameRunner();
 
   void start();

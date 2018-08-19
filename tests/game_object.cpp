@@ -8,7 +8,9 @@ namespace {
 
 class OnDeathCallCounter : public GameObject {
 public:
-  OnDeathCallCounter(GameEngine* game_engine) : GameObject(game_engine), on_death_call_count_(0) {}
+  explicit OnDeathCallCounter(GameEngine* game_engine) :
+      GameObject(game_engine),
+      on_death_call_count_(0) {}
 
   void on_death() override {
     on_death_call_count_++;

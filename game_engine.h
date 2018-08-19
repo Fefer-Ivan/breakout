@@ -6,6 +6,7 @@
 #include <list>
 #include <memory>
 #include <mutex>
+#include <string>
 #include <vector>
 
 namespace breakout {
@@ -16,7 +17,7 @@ class StaticBoxCollider;
 
 class GameEngine {
 public:
-  GameEngine(std::unique_ptr<InputManager> input_manager) :
+  explicit GameEngine(std::unique_ptr<InputManager> input_manager) :
       stopped_(false),
       input_manager_(std::move(input_manager)) {}
 
@@ -48,7 +49,7 @@ protected:
 private:
   class CoordinatesTransformCanvasWrapper : public Canvas {
   public:
-    CoordinatesTransformCanvasWrapper(Canvas* canvas) :
+    explicit CoordinatesTransformCanvasWrapper(Canvas* canvas) :
         Canvas(kGameFieldWidth, kGameFieldHeight),
         canvas_(canvas) {}
 
@@ -66,8 +67,8 @@ private:
   void update(const Seconds& time_delta);
 
   void handle_collisions();
-  void handle_dynamic_collisions(std::shared_ptr<DynamicBoxCollider>& lhs_collider, size_t rhs_last_index);
-  void handle_static_collisions(std::shared_ptr<DynamicBoxCollider>& lhs_collider);
+  void handle_dynamic_collisions(DynamicBoxCollider* lhs_collider, size_t rhs_last_index);
+  void handle_static_collisions(DynamicBoxCollider* lhs_collider);
 
   void remove_dead_objects();
 
@@ -84,7 +85,7 @@ private:
 
 class GameEngineRunner : protected GameEngine {
 public:
-  GameEngineRunner(std::unique_ptr<InputManager> input_manager) :
+  explicit GameEngineRunner(std::unique_ptr<InputManager> input_manager) :
       GameEngine(std::move(input_manager)) {}
   virtual ~GameEngineRunner() = default;
 

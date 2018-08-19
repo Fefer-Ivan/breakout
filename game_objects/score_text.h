@@ -1,6 +1,7 @@
 #pragma once
 #include "game_objects/game_manager.h"
 #include "game_objects/text.h"
+#include <string>
 
 namespace breakout {
 

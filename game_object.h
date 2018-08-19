@@ -11,9 +11,9 @@ public:
   explicit GameObject(GameEngine* game_engine) : game_engine_(game_engine), dead_(false) {}
   virtual ~GameObject() = default;
 
-  virtual void update(Seconds /*time_delta*/) {};
-  virtual void on_death() {};
-  virtual void draw(Canvas* /*canvas*/) const {};
+  virtual void update(Seconds /*time_delta*/) {}
+  virtual void on_death() {}
+  virtual void draw(Canvas* /*canvas*/) const {}
 
   void kill() {
     if (!dead_) {

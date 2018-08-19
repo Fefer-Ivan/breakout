@@ -13,11 +13,11 @@ namespace {
 
 constexpr Seconds kMaxTimeDelta = 0.06s;
 
-template<typename LhsColliderPtr, typename RhsColliderIt>
+template<typename ColliderPtr, typename ColliderIt>
 void handle_collisions_range(
-    LhsColliderPtr& lhs_collider,
-    RhsColliderIt rhs_collider_first,
-    RhsColliderIt rhs_collider_last) {
+    ColliderPtr lhs_collider,
+    ColliderIt rhs_collider_first,
+    ColliderIt rhs_collider_last) {
   while (rhs_collider_first != rhs_collider_last) {
     auto& rhs_collider = *rhs_collider_first++;
     if (lhs_collider->has_collision(*rhs_collider)) {
@@ -100,24 +100,22 @@ void GameEngine::reset() {
 void GameEngine::handle_collisions() {
   size_t lhs_collider_index = 0;
   for (auto& lhs_collider : dynamic_colliders_) {
-    handle_dynamic_collisions(lhs_collider, lhs_collider_index);
-    handle_static_collisions(lhs_collider);
+    handle_dynamic_collisions(lhs_collider.get(), lhs_collider_index);
+    handle_static_collisions(lhs_collider.get());
     lhs_collider_index++;
   }
 }
 
-void GameEngine::handle_dynamic_collisions(
-    std::shared_ptr<DynamicBoxCollider>& lhs_collider,
-    size_t rhs_last_index) {
+void GameEngine::handle_dynamic_collisions(DynamicBoxCollider* lhs_collider, size_t rhs_last_index) {
   handle_collisions_range(
-      lhs_collider,
+      lhs_collider.get(),
       dynamic_colliders_.begin(),
       std::next(dynamic_colliders_.begin(), static_cast<ptrdiff_t>(rhs_last_index)));
 }
 
-void GameEngine::handle_static_collisions(std::shared_ptr<DynamicBoxCollider>& lhs_collider) {
+void GameEngine::handle_static_collisions(DynamicBoxCollider* lhs_collider) {
   handle_collisions_range(
-      lhs_collider,
+      lhs_collider.get(),
       static_colliders_.begin(),
       static_colliders_.end());
 }
