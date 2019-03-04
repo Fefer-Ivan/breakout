@@ -7,7 +7,7 @@ namespace breakout {
 void GameManager::add_score(size_t score) {
   score_ += score;
   if (highscore_ < score_) {
-    highscore_ = score_;
+    highscore_ = score_.load();
   }
 }
 

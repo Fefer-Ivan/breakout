@@ -1,5 +1,6 @@
 #pragma once
 #include "game_object.h"
+#include <atomic>
 
 namespace breakout {
 
@@ -17,15 +18,15 @@ public:
       player_(nullptr) {}
 
   size_t live_count() const {
-    return live_count_;
+    return live_count_.load();
   }
 
   size_t score() const {
-    return score_;
+    return score_.load();
   }
 
   size_t highscore() const {
-    return highscore_;
+    return highscore_.load();
   }
 
   void set_player(Player* player) {
@@ -42,9 +43,9 @@ public:
   void on_ball_killed();
 
 private:
-  size_t live_count_;
-  size_t score_;
-  size_t highscore_;
+  std::atomic_size_t live_count_;
+  std::atomic_size_t score_;
+  std::atomic_size_t highscore_;
   size_t brick_count_;
   size_t ball_count_;
 
