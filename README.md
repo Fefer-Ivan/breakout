@@ -5,9 +5,7 @@ The game application require qt-5 and tests require gtest.
 
 CMakeLists.txt file is provided, so to build the game just run cmake and then make command.
 ```
-mkdir build
-cd build
-cmake ..
+cmake
 make
 ```
 
@@ -79,7 +77,7 @@ Code files from basic to more complex:
 
 ### Comments
 
-There are a lot room for improvements:
+There are a lot of room for improvements:
 1. All parameters like sizes, colors and velocities of objects are hardcoded constants. It should be separated from code in some kind of config file.
 2. There is no persistence - highscore is reset every time the game is closed. It should be saved in some file and loaded on start.
 3. Now there is only one hardcoded level. It can be great to create an interface for loading different levels.
