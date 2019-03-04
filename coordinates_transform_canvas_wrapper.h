@@ -1,7 +1,7 @@
 #pragma once
 #include "canvas.h"
 #include "vector2.h"
-#include <string>
+#include <string_view>
 
 namespace breakout {
 
@@ -12,7 +12,7 @@ public:
       canvas_(canvas) {}
 
   void draw_box(Vector2 center, double width, double height, Color color) override;
-  void draw_text(Vector2 position, const std::string& text, Color color) override;
+  void draw_text(Vector2 position, std::string_view text, Color color) override;
 
 private:
   Vector2 to_screen_vector(Vector2 v) const;

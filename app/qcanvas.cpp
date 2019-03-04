@@ -40,12 +40,12 @@ void QCanvas::draw_box(Vector2 center, double width, double height, Color color)
       static_cast<int>(height));
 }
 
-void QCanvas::draw_text(Vector2 position, const std::string& text, Color color) {
+void QCanvas::draw_text(Vector2 position, std::string_view text, Color color) {
   painter_->setPen(to_qcolor(color));
   painter_->drawText(
       static_cast<int>(position.x()),
       static_cast<int>(position.y()),
-      QString::fromStdString(text));
+      QString::fromStdString(std::string(text)));
 }
 
 

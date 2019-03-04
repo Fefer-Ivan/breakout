@@ -25,7 +25,7 @@ public:
     EXPECT_EQ(height, expected_height_);
   }
 
-  void draw_text(Vector2 position, const std::string& /*text*/, Color /*color*/) override {
+  void draw_text(Vector2 position, std::string_view /*text*/, Color /*color*/) override {
     EXPECT_EQ(position, expected_center_);
   }
 

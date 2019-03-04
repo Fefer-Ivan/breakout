@@ -1,6 +1,6 @@
 #pragma once
 #include "vector2.h"
-#include <string>
+#include <string_view>
 
 namespace breakout {
 
@@ -27,7 +27,7 @@ public:
   }
 
   virtual void draw_box(Vector2 center, double width, double height, Color color) = 0;
-  virtual void draw_text(Vector2 position, const std::string& text, Color color) = 0;
+  virtual void draw_text(Vector2 position, std::string_view text, Color color) = 0;
 
 private:
   double width_;

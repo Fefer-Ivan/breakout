@@ -16,7 +16,7 @@ void CoordinatesTransformCanvasWrapper::draw_box(
 
 void CoordinatesTransformCanvasWrapper::draw_text(
     Vector2 position,
-    const std::string& text,
+    std::string_view text,
     Color color) {
   canvas_->draw_text(to_screen_vector(position), text, color);
 }
